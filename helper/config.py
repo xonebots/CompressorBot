@@ -15,11 +15,11 @@
 from . import *
 
 try:
-    APP_ID = config("APP_ID", cast=int)
-    API_HASH = config("API_HASH")
-    BOT_TOKEN = config("BOT_TOKEN")
-    OWNER = config("OWNER_ID", default=1322549723, cast=int)
-    LOG = config("LOG_CHANNEL", cast=int)
+    APP_ID = 123 #int = 123456
+    API_HASH = "My-Api-Hash"#string = xxxx
+    BOT_TOKEN = "My-Bot-Token" #string = xxxx
+    OWNER = 123 #int = 123456
+    LOG = 123 #int = 123456
 except Exception as e:
     LOGS.info("Environment vars Missing")
     LOGS.info("something went wrong")
