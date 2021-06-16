@@ -1,4 +1,4 @@
-#    This file is part of the CompressorBot distribution.
+#    This file is part of the Compressor distribution.
 #    Copyright (c) 2021 Danish_00
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@ from .config import *
 COUNT = []
 
 uptime = dt.now()
-os.system("wget https://telegra.ph/file/75ee20ec8d8c8bba84f02.jpg -O thumb.jpg")
+os.system("wget https://telegra.ph/file/68ba9706cdf78f28b4a8c.jpg -O thumb.jpg")
 
 if not os.path.isdir("downloads/"):
     os.mkdir("downloads/")
@@ -79,13 +79,13 @@ async def progress(current, total, event, start, type_of_ps, file=None):
         speed = current / diff
         time_to_completion = round((total - current) / speed) * 1000
         progress_str = "`[{0}{1}] {2}%`\n\n".format(
-            "".join(["●" for i in range(math.floor(percentage / 5))]),
-            "".join(["○" for i in range(20 - math.floor(percentage / 5))]),
+            "".join(["▰" for i in range(math.floor(percentage / 5))]),
+            "".join(["▱" for i in range(20 - math.floor(percentage / 5))]),
             round(percentage, 2),
         )
         tmp = (
             progress_str
-            + "`{0} of {1}`\n\n`✦ Speed: {2}/s`\n\n`✦ ETA: {3}`\n\n".format(
+            + "`{0} of {1}`\n\n`💠 Speed: {2}/s`\n\n`💠 Time Left: {3}`\n\n".format(
                 hbs(current),
                 hbs(total),
                 hbs(speed),
@@ -94,10 +94,10 @@ async def progress(current, total, event, start, type_of_ps, file=None):
         )
         if file:
             await event.edit(
-                "`✦ {}`\n\n`File Name: {}`\n\n{}".format(type_of_ps, file, tmp)
+                "`💠 {}`\n\n`Name: {}`\n\n{}".format(type_of_ps, file, tmp)
             )
         else:
-            await event.edit("`✦ {}`\n\n{}".format(type_of_ps, tmp))
+            await event.edit("`💠 {}`\n\n{}".format(type_of_ps, tmp))
 
 
 async def genss(file):
@@ -135,11 +135,10 @@ async def info(file, event):
     out = stdout.decode()
     client = TelegraphPoster(use_api=True)
     client.create_api_token("Mediainfo")
-    authorUrl = await event.client.get_me().username
     page = client.post(
         title="Mediainfo",
         author=((await event.client.get_me()).first_name),
-        author_url=f"https://t.me/{authorUrl}",
+        author_url=f"https://t.me/{((await event.client.get_me()).username)}",
         text=out,
     )
     return page["url"]
